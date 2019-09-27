@@ -1,10 +1,13 @@
 #!/bin/bash
 
-ln -s /var/run/balena.sock /var/run/docker.sock
+# Launch docker daemon in our service
+dockerd & 2>/dev/null 
 
-docker ps
+#wait for docker to start.
+sleep 5s
+#Launch iotedge
+/usr/bin/iotedged -c config.yaml
 
-/usr/bin/iotedged -c /etc/iotedge/config.yaml
 while :
 do
 	echo "Just looping..."

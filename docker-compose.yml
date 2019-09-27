@@ -1,11 +1,15 @@
 version: '2.1'
+volumes:
+  docker-data: {}
 services:
   iotedge:
     build:
       context: ./iotedge
     restart: 'no'
     privileged: true
+    volumes:
+      - 'docker-data:/var/lib/docker'
     labels:
       io.resin.features.kernel-modules: '1'
       io.resin.features.firmware: '1'
-      io.resin.features.balena-socket: '1'
+
